@@ -1,0 +1,186 @@
+/* Reset some basics */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #121212;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px 0 40px;
+}
+
+/* Title styling with animated multi-color glowing text-shadow */
+.slider-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1b1c1d; /* Base text color */
+  user-select: none;
+  margin: 0 0 20px;
+
+  /* Initial glow */
+  text-shadow:
+    0 0 5px #66d9ff,
+    0 0 10px #00ffff,
+    0 0 15px #66d9ff,
+    0 0 20px #00ffff,
+    0 0 25px #66d9ff,
+    0 0 30px #00ffff,
+    0 0 40px #66d9ff,
+    0 0 50px #00ffff,
+    0 0 60px #66d9ff;
+
+  /* Animate glow */
+  animation: glowAnimation 6s ease-in-out infinite alternate;
+}
+
+@keyframes glowAnimation {
+  0% {
+    text-shadow:
+      0 0 5px #ff0057,
+      0 0 10px #ff7f50,
+      0 0 15px #ff0057,
+      0 0 20px #ff7f50,
+      0 0 25px #ff0057,
+      0 0 30px #ff7f50,
+      0 0 40px #ff0057,
+      0 0 50px #ff7f50,
+      0 0 60px #ff0057;
+  }
+  50% {
+    text-shadow:
+      0 0 5px #00ffff,
+      0 0 10px #66d9ff,
+      0 0 15px #00ffff,
+      0 0 20px #66d9ff,
+      0 0 25px #00ffff,
+      0 0 30px #66d9ff,
+      0 0 40px #00ffff,
+      0 0 50px #66d9ff,
+      0 0 60px #00ffff;
+  }
+  100% {
+    text-shadow:
+      0 0 5px #ff0057,
+      0 0 10px #ff7f50,
+      0 0 15px #ff0057,
+      0 0 20px #ff7f50,
+      0 0 25px #ff0057,
+      0 0 30px #ff7f50,
+      0 0 40px #ff0057,
+      0 0 50px #ff7f50,
+      0 0 60px #ff0057;
+  }
+}
+
+/* Slider container */
+.slider-container {
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  background: #222;
+}
+
+/* Slides container with flex and smooth transition */
+.slides {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  will-change: transform;
+}
+
+/* Each slide */
+.slide {
+  min-width: 100%;
+  user-select: none;
+  pointer-events: none;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  pointer-events: auto;
+  user-select: none;
+}
+
+/* Navigation buttons */
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  z-index: 10;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+/* Dots navigation container */
+.dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  user-select: none;
+  z-index: 10;
+}
+
+/* Each dot */
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #66d9ff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .prev,
+  .next {
+    font-size: 1.5rem;
+    padding: 6px 10px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
